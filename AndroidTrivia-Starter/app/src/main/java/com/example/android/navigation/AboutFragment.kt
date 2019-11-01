@@ -21,11 +21,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import kotlinx.android.synthetic.main.fragment_rules.view.*
 
 class AboutFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about, container, false)
+        val binding = inflater.inflate(R.layout.fragment_about,container,false)
+        binding.playButton.setOnClickListener { v: View ->
+            v.findNavController().navigate(R.id.action_aboutFragment_to_gameFragment)
+        }
+        return binding.rootView
     }
 }
