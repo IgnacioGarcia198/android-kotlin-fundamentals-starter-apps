@@ -1,7 +1,7 @@
 AndroidTrivia - starter code
 ============================
 
-Starter code for Android Kotlin Fundamentals codelab 3.1: Create and add a
+App in the state it should be at 3.1: Create and add a
 fragment.
 
 Introduction
