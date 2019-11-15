@@ -27,4 +27,6 @@
     <string name="word_is">The word is…</string>
     <string name="quote_format">\"%s\"</string>
     <string name="score_format">Current Score: %d</string>
+    <string name="word_length_format">Current word has %d letters</string>
+    <string name="letter_position_format">The letter at position %d is %s</string>
 </resources>
