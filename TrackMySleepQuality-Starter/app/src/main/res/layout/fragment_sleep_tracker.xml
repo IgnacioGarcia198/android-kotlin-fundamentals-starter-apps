@@ -76,7 +76,8 @@
             app:layout_constraintEnd_toStartOf="@+id/stop_button"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{()->viewModel.onStartTracking()}"/>
+            android:onClick="@{()->viewModel.onStartTracking()}"
+            android:enabled="@{viewModel.startButtonEnabled}"/>
 
         <Button
             android:id="@+id/stop_button"
@@ -89,7 +90,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/start_button"
             app:layout_constraintTop_toTopOf="parent"
-            android:onClick="@{()->viewModel.onStopTracking()}"/>
+            android:onClick="@{()->viewModel.onStopTracking()}"
+            android:enabled="@{viewModel.stopButtonEnabled}" />
 
         <Button
             android:id="@+id/clear_button"
@@ -103,7 +105,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{()->viewModel.onClear()}"/>
+            android:onClick="@{()->viewModel.onClear()}"
+            android:enabled="@{viewModel.clearButtonEnabled}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
