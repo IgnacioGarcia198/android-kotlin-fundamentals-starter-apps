@@ -28,6 +28,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.android.trackmysleepquality.R
 import com.example.android.trackmysleepquality.database.SleepDatabase
 import com.example.android.trackmysleepquality.databinding.FragmentSleepQualityBinding
+import androidx.lifecycle.LiveData
 
 /**
  * Fragment that displays a list of clickable icons,
@@ -54,7 +55,7 @@ class SleepQualityFragment : Fragment() {
                 inflater, R.layout.fragment_sleep_quality, container, false)
 
         val application = requireNotNull(this.activity).application
-        val arguments = SleepQualityFragmentArgs.fromBundle(arguments)
+        val arguments = SleepQualityFragmentArgs.fromBundle(arguments!!)
 
         // Create an instance of the ViewModel Factory.
         val dataSource = SleepDatabase.getInstance(application).sleepDatabaseDao
