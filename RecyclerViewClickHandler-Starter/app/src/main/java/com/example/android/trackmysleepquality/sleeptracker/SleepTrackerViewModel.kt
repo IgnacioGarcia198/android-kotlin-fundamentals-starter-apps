@@ -236,6 +236,18 @@ class SleepTrackerViewModel(
         }
     }
 
+    fun onSleepNightClicked(id:Long) {
+        _navigateToSleepDetail.value = id
+    }
+
+    private val _navigateToSleepDetail = MutableLiveData<Long>()
+    val navigateToSleepDetail:LiveData<Long>
+    get() = _navigateToSleepDetail
+
+    fun doneNavigatingToSleepDetail() {
+        _navigateToSleepDetail.value = null
+    }
+
     /**
      * Called when the ViewModel is dismantled.
      * At this point, we want to cancel all coroutines;

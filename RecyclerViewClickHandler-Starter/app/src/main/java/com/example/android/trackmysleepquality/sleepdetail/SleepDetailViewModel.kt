@@ -73,6 +73,17 @@ class SleepDetailViewModel(
         get() = _navigateToSleepTracker
 
     /**
+     * Call this immediately after navigating to [SleepTrackerFragment]
+     */
+    fun doneNavigating() {
+        _navigateToSleepTracker.value = null
+    }
+
+    fun onClose() {
+        _navigateToSleepTracker.value = true
+    }
+
+    /**
      * Cancels all coroutines when the ViewModel is cleared, to cleanup any pending work.
      *
      * onCleared() gets called when the ViewModel is destroyed.
@@ -83,15 +94,6 @@ class SleepDetailViewModel(
     }
 
 
-    /**
-     * Call this immediately after navigating to [SleepTrackerFragment]
-     */
-    fun doneNavigating() {
-        _navigateToSleepTracker.value = null
-    }
 
-    fun onClose() {
-        _navigateToSleepTracker.value = true
-    }
 
 }
