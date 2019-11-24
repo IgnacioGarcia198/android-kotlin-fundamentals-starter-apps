@@ -25,4 +25,6 @@
     <string name="display_type">For %s</string>
     <string name="display_price_monthly_rental">$%,.0f/month</string>
     <string name="display_price">$%,.0f</string>
+    <string name="property_image_content_desc">Image of a property in Mars</string>
+    <string name="for_sale_content_desc">Property for sale</string>
 </resources>

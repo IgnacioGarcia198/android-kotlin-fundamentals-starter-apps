@@ -17,4 +17,49 @@
 
 package com.example.android.marsrealestate.overview
 
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.example.android.marsrealestate.databinding.GridViewItemBinding
+import com.example.android.marsrealestate.network.MarsProperty
+
+class PhotoGridAdapter(val clickListener: ItemClickListener) : ListAdapter<MarsProperty, PhotoGridAdapter.PropertyViewHolder>(PropertyDiffCallback) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PropertyViewHolder {
+        return PropertyViewHolder.from(parent)
+    }
+
+    override fun onBindViewHolder(holder: PropertyViewHolder, position: Int) {
+        holder.bind(getItem(position),clickListener)
+    }
+
+    class PropertyViewHolder(val binding : GridViewItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(marsProperty: MarsProperty, clickListener: ItemClickListener) {
+            binding.property = marsProperty
+            binding.clickListener = clickListener
+            binding.executePendingBindings()
+        }
+
+        companion object {
+            fun from(parent: ViewGroup) : PropertyViewHolder {
+                return PropertyViewHolder(GridViewItemBinding.inflate(LayoutInflater.from(parent.context)))
+            }
+        }
+    }
+}
+
+object PropertyDiffCallback : DiffUtil.ItemCallback<MarsProperty>() {
+    override fun areItemsTheSame(oldItem: MarsProperty, newItem: MarsProperty): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: MarsProperty, newItem: MarsProperty): Boolean {
+        return oldItem == newItem
+    }
+}
+
+class ItemClickListener(val clickListener: (item: MarsProperty) -> Unit) {
+    fun onClick(item : MarsProperty) = clickListener(item)
+}
 

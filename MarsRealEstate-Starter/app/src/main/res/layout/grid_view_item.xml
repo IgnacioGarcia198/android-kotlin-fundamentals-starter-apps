@@ -20,12 +20,46 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <ImageView
-        android:id="@+id/mars_image"
+
+    <data>
+        <variable
+            name="property"
+            type="com.example.android.marsrealestate.network.MarsProperty" />
+        <variable
+            name="clickListener"
+            type="com.example.android.marsrealestate.overview.ItemClickListener" />
+        <import type="android.view.View"/>
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true"
-        android:padding="2dp"
-        tools:src="@tools:sample/backgrounds/scenic"/>
+        android:onClick="@{() -> clickListener.onClick(property)}">
+
+        <ImageView
+            android:id="@+id/mars_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:padding="2dp"
+            tools:src="@tools:sample/backgrounds/scenic"
+            app:imageUrl="@{property.imgSrcUrl}"
+            android:contentDescription="@string/property_image_content_desc" />
+
+        <ImageView
+            android:id="@+id/mars_property_type"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_gravity="bottom|end"
+            android:adjustViewBounds="true"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_for_sale_outline"
+            tools:src="@drawable/ic_for_sale_outline"
+            android:contentDescription="@string/for_sale_content_desc"
+            android:visibility="@{property.rental ? View.GONE : View.VISIBLE}"/>
+
+    </FrameLayout>
+
 </layout>
