@@ -30,10 +30,11 @@ import kotlinx.coroutines.withContext
  * Repository for fetching devbyte videos from the network and storing them on disk
  */
 class VideosRepository (private val database: VideosDatabase) {
-    suspend fun refreshVideos() {
+    suspend fun refreshVideos(callback: ()->Unit) {
         withContext(Dispatchers.IO) {
             val playlist = DevByteNetwork.devbytes.getPlaylist().await()
             database.videoDao.insertAll(playlist.asDatabaseModel())
+            callback()
         }
     }
 

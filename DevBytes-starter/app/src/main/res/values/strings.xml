@@ -16,4 +16,11 @@
 
 <resources>
     <string name="app_name">DevByte Viewer</string>
+    <string name="app_name_formatted">DevByte Viewer State: %s</string>
+    <string name="work_scheduled_notif_title">Sync started!</string>
+    <string name="work_scheduled_notif_text">Sync started…</string>
+    <string name="notification_channel_name">Devbytes Notifications</string>
+    <string name="notification_channel_description">Notifications about this app</string>
+    <string name="work_finished_notif_title">Work Finished!</string>
+    <string name="work_finished_notif_text">Work finished…</string>
 </resources>

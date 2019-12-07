@@ -22,12 +22,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
 import com.example.android.devbyteviewer.database.VideosDatabase
 import com.example.android.devbyteviewer.database.getDatabase
 import com.example.android.devbyteviewer.domain.DevByteVideo
 import com.example.android.devbyteviewer.network.DevByteNetwork
 import com.example.android.devbyteviewer.network.asDomainModel
 import com.example.android.devbyteviewer.repository.VideosRepository
+import com.example.android.devbyteviewer.work.RefreshDataWorker
 import kotlinx.coroutines.*
 import java.io.IOException
 
@@ -66,7 +69,7 @@ class DevByteViewModel(application: Application) : AndroidViewModel(application)
     private fun refreshDataFromRepository() {
         viewModelScope.launch {
             try {
-                videosRepository.refreshVideos()
+                videosRepository.refreshVideos{}
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
             }
@@ -157,6 +160,20 @@ class DevByteViewModel(application: Application) : AndroidViewModel(application)
         _isNetworkErrorShown.value = true
     }
 
+
+    /**
+     * show work state
+     */
+    private val _workStatus = WorkManager.getInstance().getWorkInfosForUniqueWorkLiveData(RefreshDataWorker.WORK_NAME)
+    val workStatus : LiveData<List<WorkInfo>>
+    get() = _workStatus
+
+    /**
+     * function to stop showing the notification.
+     */
+    fun workStatusShown() {
+
+    }
 
     /**
      * Cancel all coroutines when the ViewModel is cleared

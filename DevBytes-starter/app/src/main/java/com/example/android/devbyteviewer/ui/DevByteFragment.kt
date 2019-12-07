@@ -30,11 +30,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.WorkManager
 import com.example.android.devbyteviewer.R
 import com.example.android.devbyteviewer.databinding.DevbyteItemBinding
 import com.example.android.devbyteviewer.databinding.FragmentDevByteBinding
 import com.example.android.devbyteviewer.domain.DevByteVideo
 import com.example.android.devbyteviewer.viewmodels.DevByteViewModel
+import com.example.android.devbyteviewer.work.RefreshDataWorker
 
 /**
  * Show a list of DevBytes on screen.
@@ -129,8 +131,23 @@ class DevByteFragment : Fragment() {
         viewModel.eventNetworkError.observe(this, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()
         })
+        showWorkStatus()
+
 
         return binding.root
+    }
+
+    /**
+     * Method that shows toasts with information about the {@link RefreshDataWorker}.
+     */
+    private fun showWorkStatus() {
+        viewModel.workStatus.observe(this, Observer {
+            //Toast.makeText(context, "Worker state: ${it.map { it.state }.last()}",Toast.LENGTH_SHORT).show()
+            //viewModel.workStatusShown()
+            if(it.isNotEmpty()) {
+                activity?.title = context?.getString(R.string.app_name_formatted, it.map { it.state }.last())
+            }
+        })
     }
 
     /**
